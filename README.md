@@ -1,5 +1,9 @@
 # 🐾 Codex 像素桌宠生成器
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+> 📖 [飞书使用文档](https://yltbmqhhtb.feishu.cn/docx/Pq9VdwLAwoLOoWxqAmkcOQfZngf) · [GitHub](https://github.com/leileigwl/codex-pixel-pet)
+
 把**任意一张动物/角色图片**，变成一只**复古像素风的桌面小宠物**，直接装进
 **Codex / Claude Code**（Petdex 格式），会随 AI 工作状态切换动作。
 
