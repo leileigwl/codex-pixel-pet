@@ -1,0 +1,39 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8">
+<title>像素桌宠预览</title><style>
+:root{--fw:192px;--fh:208px;--scale:1.6}*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;
+justify-content:center;gap:24px;font-family:-apple-system,"PingFang SC",system-ui,sans-serif;
+background:#1e2030;color:#cdd6f4}h1{font-size:18px;margin:0;opacity:.9}
+.stage{width:calc(var(--fw)*var(--scale));height:calc(var(--fh)*var(--scale));
+background-image:linear-gradient(45deg,#2a2c3f 25%,transparent 25%),
+linear-gradient(-45deg,#2a2c3f 25%,transparent 25%),
+linear-gradient(45deg,transparent 75%,#2a2c3f 75%),
+linear-gradient(-45deg,transparent 75%,#2a2c3f 75%);background-size:24px 24px;
+background-position:0 0,0 12px,12px -12px,-12px 0;border-radius:16px;
+box-shadow:0 12px 40px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.sprite{width:var(--fw);height:var(--fh);transform:scale(var(--scale));transform-origin:center;
+background-repeat:no-repeat;image-rendering:pixelated}
+.controls{display:flex;flex-wrap:wrap;gap:8px;max-width:540px;justify-content:center}
+button{background:#313244;color:#cdd6f4;border:1px solid #45475a;padding:8px 14px;
+border-radius:8px;cursor:pointer;font-size:13px}
+button.active{background:#89b4fa;color:#1e1e2e;border-color:#89b4fa;font-weight:600}
+.hint{font-size:12px;opacity:.6}</style></head><body>
+<h1 id="title">🐾 像素桌宠预览</h1>
+<div class="stage"><div class="sprite" id="sprite"></div></div>
+<div class="controls" id="controls"></div>
+<div class="hint">每行=一个状态，对应 Codex 的 AI 活动。点按钮切换。</div>
+<script>
+const FW=192,FH=208,COLS=9,SHEET="spritesheet.webp";
+const STATES=[["idle","待机·呼吸"],["wave","打招呼"],["run","奔跑"],["failed","出错"],
+["review","复核"],["jump","跳跃"],["extra1","转身"],["extra2","爱心"]];
+const sprite=document.getElementById("sprite");
+sprite.style.backgroundImage=`url("${SHEET}")`;let row=0,col=0;
+function draw(){sprite.style.backgroundPosition=`${-col*FW}px ${-row*FH}px`}
+setInterval(()=>{col=(col+1)%COLS;draw()},120);
+const controls=document.getElementById("controls");
+STATES.forEach(([id,label],i)=>{const b=document.createElement("button");
+b.textContent=label;if(i===0)b.classList.add("active");
+b.onclick=()=>{row=i;col=0;draw();[...controls.children].forEach(c=>c.classList.remove("active"));
+b.classList.add("active");document.getElementById("title").textContent="🐾 "+label};
+controls.appendChild(b)});draw();
+</script></body></html>
